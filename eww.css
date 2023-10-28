@@ -1,0 +1,12 @@
+scale{
+	width: 100%;
+}
+*{
+	font-family: DroidSansM_Nerd_Font_Mono_Regular !important;
+}
+.panelr{
+	background-color:#000000
+}
+progressbar.horizontal > trough {
+    min-width: 1px;
+}

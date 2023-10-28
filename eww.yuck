@@ -1,0 +1,132 @@
+(defpoll volume :interval "1s"
+  :initial "15"
+  "sh volume.sh")
+(defpoll songInfo :interval "3s"
+  :initial ""
+  "sh song.sh")
+(defpoll artistInfo :interval "3s"
+  :initial ""
+  "sh artist.sh")
+(defpoll name :interval "99999999s"
+  :initial "whoami"
+  "whoami")
+(defpoll time :interval "2s"
+  :initial 'date +"%I:%M %p | %a, %b %d %Y"'
+  'date +"%I:%M %p | %a, %b %d %Y"')
+(defpoll date :interval "2s"
+  :initial 'date +"%a, %b %d %Y"'
+  'date +"%a, %b %d %Y"')
+(defpoll up :interval "3s"
+  :initial 'uptime -p'
+  'uptime -p')
+(defpoll wifi :interval "20s"
+  :initial 'iwgetid -r'
+  'iwgetid -r')
+(defpoll battery :interval "10s"
+  :initial 'cat /sys/class/power_supply/BAT0/capacity'
+  'cat /sys/class/power_supply/BAT0/capacity')
+(defpoll Bstatus :interval "10s"
+  :initial 'cat /sys/class/power_supply/BAT0/status'
+  'cat /sys/class/power_supply/BAT0/status')
+(defpoll volM :interval "1s"
+  :initial 'sh ./volume.sh'
+  'sh ./volume.sh')
+(defpoll work :interval "3s"
+  :initial 'i3-msg -t get_workspaces | json_pp | grep "num" | cut -c 15 | tr "\n" "" '
+  'i3-msg -t get_workspaces | json_pp | grep "num" | cut -c 15 | tr -d "\n"')
+(defvar play false) 
+(defvar bat false)
+(defwidget vol[val]
+  (scale :class "scale" :value val :hexpand true :onchange "pactl set-sink-volume 0 {}%" :halign "fill":style "width: 100%;")
+)
+(defwidget mute[]
+  (button :onclick "pactl set-sink-mute 0 toggle" :class "mute" "󰝟")
+)
+(defwidget song[name]
+  (label :text name :limit-width 4)
+)
+(defwidget artist[name]
+  (label :text name :limit-width 4)
+)
+(defwidget pause[]
+  (button :onclick "playerctl play-pause" "▶")
+)
+(defwidget prev[]
+  (button :onclick "playerctl previous" "⏮")
+)
+(defwidget next[]
+  (button :onclick "playerctl next" "⏭")
+)
+
+(defwindow dash
+  :stacking "fg"
+  :windowtype "normal"
+  :wm-ignore true
+  :visible true
+  :geometry (geometry :x "0%"
+              :y "0%"
+              :width "25%"
+              :height "100%"
+              :anchor "center left")
+    (box :style "background-color:#1A1515; margin: 5;color:#FFE9C7;padding:25; border: 2px solid #FFE9C7":spaceing 0 :orientation "v" :halign "fill" :valign "begin"(time :txt "${time}" :halign "start")(label :text "Volume: ${volM}" :halign "center")
+(mute :valign "center")
+        (box :orientation "h"  :hexpand false (vol :halign "fill" :val "${volume}"))
+    (label :text "Brightness")
+    (box :orientation "h" :halign "center" :valign "center" :hexpand true (inc_b)(label :text "    ")(dec_b))
+    
+    (box :orientation "h" :halign "center" :valign "center"
+(label :text " ${wifi} ")
+      
+    (button :onclick "alacritty -e nmtui" "Manage Networks"))
+   (label :text "󰂂 ${battery}% | ${Bstatus}")
+    (box :orientation "h" 
+      (box :orientation "v"
+                
+    (box :orientation "h" :halign "center" :valign "center"
+      (button :onclick "alacritty" "")(button :valign "center" :halign "center" :onclick "~/eww/target/release/eww update play=${!play}" "󰝚")
+(button :onclick "firefox" "󰈹"))
+    (box :orientation "h" :halign "center" :valign "center"
+      (button :onclick "nemo" "")(button :onclick "~/eww/target/release/eww close dash" "󰅝")(button :onclick "alacritty -e nvim" "")))
+      
+      (box :orientation "v" :visible play :spacing 0
+      (box :orientation "h" (song :name "${songInfo}")(label :text "|")(artist :name "${artistInfo}")) 
+    (box :orientation "h" (prev)(pause)(next))
+    )
+
+      )
+     (label :text " ${name} | ${battery}% | ${up}" :halign "begin")
+
+      )
+)
+(defwidget time [txt]
+  (label :text txt :style "font-size: 30px")
+)
+(defwidget inc_b []
+  (button :onclick "lxqt-backlight_backend --inc 10 %" "+")
+)
+(defwidget dec_b []
+  (button :onclick "lxqt-backlight_backend --dec 10 %" "-")
+)
+(defwidget close[]
+  (button :onclick "~/eww/target/release/eww close dash" :style "background-color: #00000000" "Close" )
+)
+
+
+
+
+
+
+
+
+(defwindow over
+  :stacking "fg"
+  :windowtype "normal"
+  :wm-ignore true
+  :visible true
+  :geometry (geometry :x "0%"
+              :y "0%"
+              :width "25%"
+              :height "25%"
+              :anchor "center center"
+              )
+ (box :orientation "v" :style "background-color:#1A1515; color:#FFE9C7; padding:3; border: 2px solid #FFE9C7"(box :orientation "h"(button :onclick "i3-msg workspace prev" "")(label :text "${work}")(button :onclick "i3-msg workspace next" ""))(button  :onclick "./nextW.sh" "new")))
