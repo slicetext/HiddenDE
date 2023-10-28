@@ -94,7 +94,7 @@
     )
 
       )
-     (label :text " ${name} | ${battery}% | ${up}" :halign "begin")
+     (label :text " ${name} | ${up}" :halign "begin")
 
       )
 )
