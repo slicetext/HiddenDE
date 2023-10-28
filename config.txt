@@ -1,0 +1,4 @@
+#Background Color
+bg #1A1515
+#Foreground Color
+fg #FFE9C7

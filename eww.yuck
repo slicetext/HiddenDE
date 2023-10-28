@@ -34,6 +34,16 @@
 (defpoll work :interval "3s"
   :initial 'i3-msg -t get_workspaces | json_pp | grep "num" | cut -c 15 | tr "\n" "" '
   'i3-msg -t get_workspaces | json_pp | grep "num" | cut -c 15 | tr -d "\n"')
+
+
+
+(defpoll bg :interval "1s"
+  :initial 'cat ./config.txt | grep bg | cut -c 4-'
+  'cat ./config.txt | grep bg | cut -c 4-')
+(defpoll fg :interval "1s"
+  :initial 'cat ./config.txt | grep fg | cut -c 4-'
+  'cat ./config.txt | grep fg | cut -c 4-')
+
 (defvar play false) 
 (defvar bat false)
 (defwidget vol[val]
@@ -68,7 +78,7 @@
               :width "25%"
               :height "100%"
               :anchor "center left")
-    (box :style "background-color:#1A1515; margin: 5;color:#FFE9C7;padding:25; border: 2px solid #FFE9C7":spaceing 0 :orientation "v" :halign "fill" :valign "begin"(time :txt "${time}" :halign "start")(label :text "Volume: ${volM}" :halign "center")
+    (box :style "background-color:${bg}; margin: 5;color:${fg};padding:25; border: 2px solid ${fg}":spaceing 0 :orientation "v" :halign "fill" :valign "begin"(time :txt "${time}" :halign "start")(label :text "Volume: ${volM}" :halign "center")
 (mute :valign "center")
         (box :orientation "h"  :hexpand false (vol :halign "fill" :val "${volume}"))
     (label :text "Brightness")
@@ -129,4 +139,4 @@
               :height "25%"
               :anchor "center center"
               )
- (box :orientation "v" :style "background-color:#1A1515; color:#FFE9C7; padding:3; border: 2px solid #FFE9C7"(box :orientation "h"(button :onclick "i3-msg workspace prev" "")(label :text "${work}")(button :onclick "i3-msg workspace next" ""))(button  :onclick "./nextW.sh" "new")))
+ (box :orientation "v" :style "background-color:${bg}; color:${fg}; padding:3; border: 2px solid ${fg}"(box :orientation "h"(button :onclick "i3-msg workspace prev" "")(label :text "${work}")(button :onclick "i3-msg workspace next" ""))(button  :onclick "./nextW.sh" "new")))

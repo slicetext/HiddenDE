@@ -13,5 +13,8 @@ bindsym $mod+o exec ~/eww/target/release/eww open --toggle over
 bindsym $mod+p exec ~/eww/target/release/eww open --toggle dash
 ```
 
+### Configuring
+You can edit the config.txt file to change your HiddenDE experience. It clearly explains how to change itself.
+
 ### What makes HiddenDE Special
 HiddenDE is based on the idea of a desktop where everything is hidden when not needed. HiddenDE displays no panel, dock, or dash unless opened with a keybind.
