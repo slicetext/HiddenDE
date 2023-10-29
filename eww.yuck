@@ -43,6 +43,15 @@
 (defpoll fg :interval "1s"
   :initial 'cat ./config.txt | grep fg | cut -c 4-'
   'cat ./config.txt | grep fg | cut -c 4-')
+(defpoll nm :interval "1s"
+  :initial 'cat ./config.txt | grep nm | cut -c 4-'
+  'cat ./config.txt | grep nm | cut -c 4-')
+(defpoll te :interval "1s"
+  :initial 'cat ./config.txt | grep te | cut -c 4-'
+  'cat ./config.txt | grep te | cut -c 4-')
+(defpoll fm :interval "1s"
+  :initial 'cat ./config.txt | grep fm | cut -c 4-'
+  'cat ./config.txt | grep fm | cut -c 4-')
 
 (defvar play false) 
 (defvar bat false)
@@ -87,16 +96,16 @@
     (box :orientation "h" :halign "center" :valign "center"
 (label :text " ${wifi} ")
       
-    (button :onclick "alacritty -e nmtui" "Manage Networks"))
+    (button :onclick "${nm}" "Manage Networks"))
    (label :text "󰂂 ${battery}% | ${Bstatus}")
     (box :orientation "h" 
       (box :orientation "v"
                 
     (box :orientation "h" :halign "center" :valign "center"
-      (button :onclick "alacritty" "")(button :valign "center" :halign "center" :onclick "~/eww/target/release/eww update play=${!play}" "󰝚")
+      (button :onclick "${te}" "")(button :valign "center" :halign "center" :onclick "~/eww/target/release/eww update play=${!play}" "󰝚")
 (button :onclick "firefox" "󰈹"))
     (box :orientation "h" :halign "center" :valign "center"
-      (button :onclick "nemo" "")(button :onclick "~/eww/target/release/eww close dash" "󰅝")(button :onclick "alacritty -e nvim" "")))
+      (button :onclick "${fm}" "")(button :onclick "~/eww/target/release/eww close dash" "󰅝")(button :onclick "alacritty -e nvim" "")))
       
       (box :orientation "v" :visible play :spacing 0
       (box :orientation "h" (song :name "${songInfo}")(label :text "|")(artist :name "${artistInfo}")) 

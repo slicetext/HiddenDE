@@ -2,3 +2,9 @@
 bg #1A1515
 #Foreground Color
 fg #FFE9C7
+#Command to start network manager program
+nm alacritty -e nmtui
+#Terminal to launch
+te alacritty
+#File Manager
+fm nemo
