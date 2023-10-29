@@ -21,3 +21,8 @@ However, some elements are affected by the gtk theme you are currently using, so
 HiddenDE is based on the idea of a desktop where everything is hidden when not needed. HiddenDE displays no panel, dock, or dash unless opened with a keybind.
 ### How to use HiddenDE!
 If you put those lines in your i3 config, you can open the dashboard with $mod+p and switch workspaces with $mod+o.
+### Showcase
+Workspace Selector
+![Workspace Selector](./1.jpg "A Screenshot")
+Dashboard
+![Dashboard](./2.png "Another Screenshot")
