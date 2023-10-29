@@ -23,6 +23,6 @@ HiddenDE is based on the idea of a desktop where everything is hidden when not n
 If you put those lines in your i3 config, you can open the dashboard with $mod+p and switch workspaces with $mod+o.
 ### Showcase
 Workspace Selector
-![Workspace Selector](./1.jpg "A Screenshot")
+![Workspace Selector](./docs/1.jpg "A Screenshot")
 Dashboard
-![Dashboard](./2.png "Another Screenshot")
+![Dashboard](./docs/2.png "Another Screenshot")
